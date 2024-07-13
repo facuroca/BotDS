@@ -1,4 +1,5 @@
 //requerimientos 
+require('dotenv').config();
 const discord = require('discord.js'); //requerir discord.js
 const bot = new discord.Client();
 const config = require('./config.json'); //requerir archivo de configuración
@@ -23,4 +24,4 @@ Client.on('ready', async ( client ) => {
 
 //conectar el bot
 
-Client.login('MTI2MTgxNTY3MDQ2Nzk4OTYyNg.GIQnQ3.jsnP6fP7rxAOu1-whzE2wQyZplWehJ1NPcqf8o');
+Client.login('secrets.env.DISCORD_BOT_TOKEN');
