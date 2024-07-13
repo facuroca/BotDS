@@ -23,5 +23,4 @@ Client.on('ready', async ( client ) => {
 });
 
 //conectar el bot
-
 Client.login('secrets.env.DISCORD_BOT_TOKEN');
