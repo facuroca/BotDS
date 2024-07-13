@@ -1,8 +1,6 @@
 //requerimientos 
 require('dotenv').config();
 const discord = require('discord.js'); //requerir discord.js
-const config = require('./config.json'); //requerir archivo de configuración
-const fs = require('fs'); //requerir sistema de archivos
 bot.commands = new discord.Collection(); //coleccion de comandos
 
 
