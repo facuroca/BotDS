@@ -9,10 +9,7 @@ bot.commands = new discord.Collection(); //coleccion de comandos
 
 //definir cliente de discord
 const Client = new discord.Client({
-    intents: [
-        discord.Intents.FLAGS.DIRECT_MESSAGES,
-        discord.Intents.FLAGS.GUILD_MEMBERS
-    ]
+    intents: [37123]
 });
 
 
