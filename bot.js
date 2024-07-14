@@ -12,7 +12,7 @@ const client = new Client({
 
 //contenido del bot
 client.on(Events.ClientReady, async () => {
-    console.log(`El bot esta conectado como ${client.user.tag}`);
+    console.log(`El bot esta conectado como ${client.user.username}`);
 });
 
 //conectar el bot
