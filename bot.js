@@ -1,7 +1,7 @@
 //requerimientos 
 require('dotenv').config();
 const {Client, Events} = require('discord.js'); //requerir discord.js
-discord.commands = new discord.Collection(); //coleccion de comandos
+
 
 
 //definir cliente de discord
