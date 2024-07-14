@@ -20,9 +20,14 @@ Client.on('ready', async ( client ) => {
 Client.login(process.env.DISCORD_BOT_TOKEN);
 
 //responder al primer mensaje recibido en el canal
-Client.on('messageCreate', async (message) => {
-    if (message.author.bot) return;
+Client.on(Events.MessageCreate, async (message) => {
     if (message.content === 'facu') {
         message.reply('crack');
+    }
+    if (message.content === 'g1help') {
+        message.reply('Puedes recibir ayuda abriendo un ticket en el canal de soporte');
+    }
+    if (message.content === 'mariano') {
+        message.reply('bondar');
     }
 });
