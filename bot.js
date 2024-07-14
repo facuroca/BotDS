@@ -27,6 +27,9 @@ client.on(Events.MessageCreate, async (message) => {
     if (message.content === 'mariano') { 
         message.reply('bondar')
     }
+    if (message.content === 'mati') { 
+        message.reply('D10S del rocket')
+    }
     if (!message.content.startsWith('-')) return
 
     const args = message.content.slice(1).trim().split(' ')[0]
