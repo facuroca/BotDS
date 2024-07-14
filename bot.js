@@ -17,4 +17,4 @@ Client.on('ready', async ( client ) => {
 });
 
 //conectar el bot
-Client.login('process.env.DISCORD_BOT_TOKEN');
+Client.login(process.env.DISCORD_BOT_TOKEN);
