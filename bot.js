@@ -1,26 +1,25 @@
 //requerimientos 
 require('dotenv').config();
-const discord = require('discord.js'); //requerir discord.js
+const {Client, Events} = require('discord.js'); //requerir discord.js
 discord.commands = new discord.Collection(); //coleccion de comandos
 
 
 //definir cliente de discord
-const Client = new discord.Client({
-    intents: [37123]
+const client = new discord.Client({
+    intents: 3276799
 });
 
 
 //contenido del bot
-Client.on('ready', async ( client ) => {
-    console.log('Bot is ready to go!');
-    Client.user.setActivity('!help', { type: 'WATCHING' });
+client.on(Events.ClientReady, async () => {
+    console.log('El bot esta conectado como ${client.user.tag}');
 });
 
 //conectar el bot
-Client.login(process.env.DISCORD_BOT_TOKEN);
+client.login(process.env.DISCORD_BOT_TOKEN);
 
 //responder al primer mensaje recibido en el canal
-Client.on(Events.MessageCreate, async (message) => {
+client.on(Events.MessageCreate, async (message) => {
     if (message.content === 'facu') {
         message.reply('crack');
     }
