@@ -5,7 +5,7 @@ const {Client, Events} = require('discord.js'); //requerir discord.js
 
 
 //definir cliente de discord
-const client = new discord.Client({
+const client = new Client({
     intents: 3276799
 });
 
