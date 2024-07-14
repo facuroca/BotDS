@@ -11,7 +11,6 @@ module.exports = {
                 .setRequired(true)),
     async execute(interaction) {
         const message = interaction.options.getString('message');
-        if (!message) return interaction.reply('Debes escribir algo para que pueda repetirlo');
         await interaction.reply(message);
     },
 };
