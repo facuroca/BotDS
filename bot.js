@@ -12,7 +12,7 @@ const client = new Client({
 
 //contenido del bot
 client.on(Events.ClientReady, async () => {
-    console.log('El bot esta conectado como ${client.user.tag}');
+    console.log(`El bot esta conectado como ${client.user.tag}`);
 });
 
 //conectar el bot
@@ -20,13 +20,15 @@ client.login(process.env.DISCORD_BOT_TOKEN);
 
 //responder al primer mensaje recibido en el canal
 client.on(Events.MessageCreate, async (message) => {
-    if (message.content === 'facu') {
-        message.reply('crack');
-    }
-    if (message.content === 'g1help') {
-        message.reply('Puedes recibir ayuda abriendo un ticket en el canal de soporte');
-    }
-    if (message.content === 'mariano') {
-        message.reply('bondar');
+    if (message.author.bot) return
+    if (!message.content.startsWith('-')) return
+
+    const args = message.content.slice(1).trim().split(' ')[0]
+     
+    try {
+        const command = require(`./commands/${args}`);
+        command.run(message);
+    } catch (error) {
+        console.log(`ha ocurrido un error al intentar responder el mensaje -${args}`, error.message);
     }
 });
