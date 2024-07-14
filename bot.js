@@ -18,3 +18,11 @@ Client.on('ready', async ( client ) => {
 
 //conectar el bot
 Client.login(process.env.DISCORD_BOT_TOKEN);
+
+//responder al primer mensaje recibido en el canal
+Client.on('messageCreate', async (message) => {
+    if (message.author.bot) return;
+    if (message.content === 'facu') {
+        message.reply('crack');
+    }
+});
