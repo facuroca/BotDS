@@ -1,11 +1,17 @@
+const { SlashCommandBuilder } = require('discord.js');
+
 //comando say repite los argumentos que le des
 module.exports = {
-    name: 'say',
-    description: 'Repite lo que escribas',
-    run: async (message)    => {
-        const args = message.content.split(' ').slice(1).join(' ');
-        if(args.length < 1) return message.reply('Debes escribir algo para que pueda repetirlo');
-        await message.reply(args); 
-        await message.delete();
-    }
-}
+    data: new SlashCommandBuilder()
+        .setName('say')
+        .setDescription('Repite lo que escribas')
+        .addStringOption(option =>
+            option.setName('message')
+                .setDescription('El mensaje que quieres repetir')
+                .setRequired(true)),
+    async execute(interaction) {
+        const message = interaction.options.getString('message');
+        if (!message) return interaction.reply('Debes escribir algo para que pueda repetirlo');
+        await interaction.reply(message);
+    },
+};
