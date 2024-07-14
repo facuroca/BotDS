@@ -1,67 +1,120 @@
-require('dotenv').config();
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder} = require('discord.js');
-const axios = require('axios');
+require("dotenv").config();
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const axios = require("axios");
 
 const btcButton = new ButtonBuilder()
-.setStyle(1)
-.setLabel('BTC')
-.setCustomId('bitcoin')
+  .setStyle(1)
+  .setLabel("BTC")
+  .setCustomId("bitcoin");
 const ethButton = new ButtonBuilder()
-.setStyle(1)
-.setLabel('ETH')
-.setCustomId('ethereum')
+  .setStyle(1)
+  .setLabel("ETH")
+  .setCustomId("ethereum");
 const usdButton = new ButtonBuilder()
-.setStyle(1)
-.setLabel('USD-Blue')
-.setCustomId('usdBlue')
+  .setStyle(1)
+  .setLabel("USD-Blue")
+  .setCustomId("usdBlue");
 
-    module.exports = { 
-    name: 'currency',
-    description: 'Muestra el precio actual de diferentes monedas',
-    run: async (message) => { 
+module.exports = {
+  name: "currency",
+  description: "Muestra el precio actual de diferentes monedas",
+  run: async (message) => {
+    const actionRow = new ActionRowBuilder().addComponents(
+      btcButton,
+      ethButton,
+      usdButton
+    );
 
-        const actionRow = new ActionRowBuilder()
-            .addComponents(btcButton, ethButton, usdButton);
+    const reply = await message.reply({
+      content: "Selecciona una opción:",
+      components: [actionRow],
+    });
 
-        const reply = await message.reply({
-            content: 'Selecciona una opción:',
-            components: [actionRow]
-        });
+    const collector = message.channel.createMessageComponentCollector({
+      filter: (interaction) =>
+        interaction.user.id === message.author.id &&
+        interaction.message.id === reply.id,
+      time: 60 * 1000, // 1 minuto
+    });
 
-        const collector = message.channel.createMessageComponentCollector({
-            filter: (interaction) => interaction.user.id === message.author.id && interaction.message.id === reply.id,
-            time: 60 * 1000 // 1 minuto
-        });
+    collector.on("collect", async (interaction) => {
+      if (interaction.customId === "bitcoin") {
+        const url =
+          "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd";
+        try {
+          const response = await axios.get(url);
+          const price = response.data.bitcoin.usd;
+          const embed = new EmbedBuilder()
+            .setColor("Blurple")
+            .setTitle("Bitcoin (BTC)")
+            .setDescription(
+              `El precio actual de Bitcoin (BTC) es: $${price.toFixed(2)} USD.`
+            )
+            .setImage(
+              "https://www.bankmagazine.com.ar/wp-content/uploads/2024/02/Bitcoin-4.jpg"
+            )
+            .setTimestamp();
+          await interaction.reply({ embeds: [embed] });
+        } catch (error) {
+          console.error("Error al obtener el precio de Bitcoin:", error);
+          await interaction.reply({
+            content: "Hubo un error al obtener el precio de Bitcoin.",
+            ephemeral: true,
+          });
+        }
+      } else if (interaction.customId === "ethereum") {
+        const url =
+          "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd";
+        try {
+          const response = await axios.get(url);
+          const price = response.data.ethereum.usd;
+          const embed = new EmbedBuilder()
+            .setColor("Blurple")
+            .setTitle("Ethereum (ETH)")
+            .setDescription(
+              `El precio actual de Ethereum (ETH) es: $${price.toFixed(2)} USD.`
+            )
+            .setImage(
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxDRY3WTxtDJOkN2bRZ73FQVTbFhj-S7GGIacTn8RrXT9VRXV8V3nW_-otDktQwS3aGDA&usqp=CAU"
+            )
+            .setTimestamp();
+          await interaction.reply({ embeds: [embed] });
+        } catch (error) {
+          console.error("Error al obtener el precio de Ethereum:", error);
+          await interaction.reply({
+            content: "Hubo un error al obtener el precio de Ethereum.",
+            ephemeral: true,
+          });
+        }
+      } else if (interaction.customId === "usdBlue") {
+        const url = "https://dolarapi.com/v1/dolares/blue";
+        try {
+          const response = await axios.get(url);
+          const buy = response.data.compra;
+          const sell = response.data.venta;
+          const embed = new EmbedBuilder()
+            .setColor("Blurple")
+            .setTitle("Dolar Blue (USD)")
+            .setDescription(
+              `El precio actual del Dolar Blue (USD) para la compra es: $${buy.toFixed(2)} USD. y para la venta es: $${sell.toFixed(2)} USD.`
+            )
+            .setImage(
+              "https://www.lavoz.com.ar/resizer/z0TJfzaS9uB0eUtPpSg1RIakboI=/0x0:0x0/980x640/filters:quality(80):format(webp)/cloudfront-us-east-1.images.arcpublishing.com/grupoclarin/BBSQRTTJHNFKNBR7YUUXIN6ISM.jpg"
+            )
+            .setTimestamp();
+          await interaction.reply({ embeds: [embed] });
+        } catch (error) {
+          console.error("Error al obtener el precio de USD-Blue:", error);
+          await interaction.reply({
+            content: "Hubo un error al obtener el precio de USD-Blue.",
+            ephemeral: true,
+          });
+        }
+      }
+    });
 
-        collector.on('collect', async (interaction) => {
-            // Here, you should handle the interaction based on the customId of the button pressed.
-            // The previous version incorrectly used 'currency' as the customId in the condition.
-            // This section needs to be adjusted based on what you want to do with each button press.
-            // Example:
-            if (interaction.customId === 'bitcoin') {
-                const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd';
-                try {
-                    const response = await axios.get(url); // Fixed destructuring assignment
-            
-                    const price = response.data.bitcoin.usd; // Correctly access the price
-            
-                    // Imprimir la respuesta completa para diagnóstico
-                    console.log(JSON.stringify(response.data, null, 2));
-            
-                    await interaction.reply({ content: `Has seleccionado Bitcoin (BTC). Su precio actual es: $${price.toFixed(2)} USD.` });
-                } catch (error) {
-                    console.error('Error al obtener el precio de Bitcoin:', error);
-                    await interaction.reply({ content: 'Hubo un error al obtener el precio de Bitcoin.', ephemeral: true });
-                }
-            } else if (interaction.customId === 'ethereum') {
-                await interaction.reply({ content: `Has seleccionado Ethereum (ETH). su precio actual es: ` }).catch(console.error);
-            } else if (interaction.customId === 'usdBlue') {
-                await interaction.reply({ content: `Has seleccionado Dólar Blue (USD). su precio actual es: ` }).catch(console.error);
-            }
-        });
-
-        collector.on('end', () => {
-            reply.edit({components: [] }).catch(console.error);
-        });
-    }
-}
+    collector.on("end", () => {
+      reply.edit({ components: [] }).catch(console.error);
+    });
+  },
+};
