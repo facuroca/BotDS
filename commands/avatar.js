@@ -11,7 +11,7 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setTitle(`Avatar de ${member.user.username}`)
             .setImage(avatar)
-            .setColor('RANDOM')
+            .setColor('Blurple')
             .setTimestamp();
         message.reply({embeds: [embed]});
     }
