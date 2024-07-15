@@ -12,7 +12,6 @@ const client = new Client({
 
 //definir colecciones
 client.commands = getCommands('./commands');
-client.buttonCommands = getButtonCommands('./commands');
 
 
 
@@ -38,7 +37,7 @@ client.on(Events.MessageCreate, async (message) => {
 });
 
 client.on('interactionCreate', async interaction => {
-    if (interaction.isChatInputCommand()) {
+    if (!interaction.isChatInputCommand()) return; 
         const command = client.commands.get(interaction.commandName);
 
         try {
@@ -47,17 +46,6 @@ client.on('interactionCreate', async interaction => {
         } catch (error) {
             console.error(`Error al ejecutar el comando ${interaction.commandName}:`, error);
         }
-    } else if (interaction.isButton()) {
-        await interaction.deferUpdate();
-        const buttonCommand = client.buttonCommands.get(interaction.customId);
-        setTimeout(async () => {
-            try {
-                await buttonCommand.execute(interaction);
-            } catch (error) {
-                console.error(`Error al ejecutar el comando de botón: ${interaction.customId}`);
-            }
-        }, 1000);
-    }
 });
 
 function getCommands(dir) {
@@ -69,17 +57,6 @@ function getCommands(dir) {
     }
     return commands;
 }
-
-function getButtonCommands(dir) {
-    let buttonCommands = new Collection();
-    const commandFiles = getFiles(dir);
-    for (const file of commandFiles) {
-        const command = require(file);
-        buttonCommands.set(command.data.toJSON().name, command);
-    }
-    return buttonCommands;
-}
-
 function getFiles(dir) {
     const files = fs.readdirSync(dir, { withFileTypes: true });
     let commandFiles = [];
