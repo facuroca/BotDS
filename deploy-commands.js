@@ -12,10 +12,10 @@ function getFiles(dir) {
         if (file.isDirectory()) {
             commandFiles = [
                 ...commandFiles,
-                ...getFiles(`${dir}/${file.name}`) // Use path.join for cross-platform compatibility
+                ...getFiles(`${dir}/${file.name}`) 
             ];
         } else if (file.name.endsWith(".js")) {
-            commandFiles.push(`${dir}/${file.name}`); // Use path.join here as well
+            commandFiles.push(`${dir}/${file.name}`); 
         }
     }
     return commandFiles;
@@ -38,9 +38,7 @@ for (const file of commandFiles) {
 
 const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_BOT_TOKEN);
 
-rest.put(
-    Routes.applicationGuildCommands(process.env.APPLICATION_ID, process.env.DISCORD_GUILD_ID),
-    { body: commands },
-)
+rest.put(Routes.applicationCommands(process.env.APPLICATION_ID),
+    { body: commands },)
     .then(() => console.log('Successfully registered application commands.'))
     .catch(console.error);
