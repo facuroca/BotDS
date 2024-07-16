@@ -12,9 +12,14 @@ module.exports = {
         .setName("crypto")
         .setDescription("Selecciona una crypto")
         .setRequired(true)
-        .setChoices({name: "Bitcoin", value: "bitcoin"}, {name: "Ethereum", value: "ethereum"},
-           {name: "Solana", value: "solana"}, {name: "BNB", value: "bnb"},
-            {name: "Shiba Inu", value: "shib"}, {name: "Litecoin", value: "ltc"})
+        .setChoices(
+          { name: "Bitcoin", value: "bitcoin" },
+          { name: "Ethereum", value: "ethereum" },
+          { name: "Solana", value: "solana" },
+          { name: "BNB", value: "bnb" },
+          { name: "Shiba Inu", value: "shib" },
+          { name: "Litecoin", value: "ltc" }
+        )
     ),
   async execute(interaction) {
     const moneda = interaction.options.getString("crypto");
@@ -68,7 +73,7 @@ module.exports = {
           ephemeral: true,
         });
       }
-    }else if (moneda === "solana") {
+    } else if (moneda === "solana") {
       const url =
         "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd";
       try {
@@ -102,7 +107,9 @@ module.exports = {
           .setColor("Blurple")
           .setTitle("Binance Coin (BNB)")
           .setDescription(
-            `El precio actual de Binance Coin (BNB) es: $${price.toFixed(2)} USD.`
+            `El precio actual de Binance Coin (BNB) es: $${price.toFixed(
+              2
+            )} USD.`
           )
           .setImage(
             "https://www.criptonoticias.com/wp-content/uploads/2024/04/binance-BNB-imagen-destacada-1024x570.jpeg"
