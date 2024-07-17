@@ -26,6 +26,6 @@ module.exports = {
       .setDescription(`👋Bienvenido al servidor PAPAAA, ${member.user}👋 `)
       .setImage(selectedImage)
       .setColor("Red");
-    channel.send(embed);
+    channel.send({ embeds: [embed] });
   },
 };
