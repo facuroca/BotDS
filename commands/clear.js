@@ -1,4 +1,3 @@
-//comando clear utilizando slashcommandbuilder
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { PermissionFlagsBits } = require("discord.js");
 
