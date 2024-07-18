@@ -24,25 +24,22 @@ module.exports = {
         await page.goto('https://chat-app-f2d296.zapier.app/');
 
         //typing prompt
-        await page.waitForSelector('textarea[data-testid="user-prompt"]');
-        await page.focus('textarea[data-testid="user-prompt"]');
+        await page.waitForSelector('textarea[data-testid="user-prompt"][placeholder="automate"]');
+        await page.focus('textarea[data-testid="user-prompt"][placeholder="automate"]');
         await page.keyboard.type(text);
         await page.keyboard.press("Enter");
 
         //wait for response
-        await page.waitForSelector('div[data-testid="bot-message"]', {timeout: 30000});
-        
-        var responseContent = await page.$eval('div[data-testid="bot-message"]', element => element.innerText);
-        console.log(responseContent);
-        
-
+        await page.waitForSelector('div > [data-testid="bot-message"]', {timeout: 50000});
+        var value = await page.$$eval('div > [data-testid="bot-message"]', async elements =>{ return elements.map((element) => element.textContent)});
+        console.log(value)
         await browser.close();
 
         const embed = new EmbedBuilder()
-            //.setDescription(`\`\`\`${responseContent.join('\n')}\`\`\``)
-            .setDescription(`\`\`\`${responseContent}\`\`\``)
-            .setColor("Blurple");
-            //.setImage("https://canalc.com.ar/wp-content/uploads/2023/04/What-is-ChatGPT-Beginners-Guide-to-Using-the-AI-Chatbot.webp")
+            //.setDescription(`\`\`\`${value.join('\n')}\`\`\``)
+            .setDescription(`\`\`\`${value}\`\`\``)
+            .setColor("Blurple")
+            .setImage("https://canalc.com.ar/wp-content/uploads/2023/04/What-is-ChatGPT-Beginners-Guide-to-Using-the-AI-Chatbot.webp")
 
             await interaction.editReply({embeds: [embed]});
 
