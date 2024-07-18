@@ -6,13 +6,13 @@ module.exports = {
         .setDescription("Hacete pasar por otro usuario")
         .addUserOption((option) =>
             option
-                .setName("usuario")
+                .setName("user")
                 .setDescription("El usuario que queres imitar")
                 .setRequired(true)
         )
         .addStringOption((option) =>
             option
-                .setName("mensaje")
+                .setName("message")
                 .setDescription("El mensaje que queres enviar")
                 .setRequired(true)
         ),
@@ -29,6 +29,6 @@ module.exports = {
             }, 3000);
             
         });
-        await interaction.reply({content: "Acabo de imitar al usuario aca arriba!", ephemeral: true});
+        await interaction.reply({content: "Acabo de imitar al usuario debajo mio!", ephemeral: true});
     },
 };
