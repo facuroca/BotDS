@@ -4,24 +4,23 @@ The G1P Bot is a newly programmed bot that its sole purpose is to do everything 
 
 ## Contents
 
-* [Features](#features)
-* [Usage](#usage)
-  * [Dependencies](#dependencies)
-  * [Hosting Requirements](#hosting-requirements)
-  * [Running](#running)
+- [Features](#features)
+- [Usage](#usage)
+  - [Dependencies](#dependencies)
+  - [Hosting Requirements](#hosting-requirements)
+  - [Running](#running)
 
 ## Features
 
-- [X] Command for showing 1024px avatars of discord users `/avatar user`
-- [X] Command for clearing messages in a text channel up to 99 messages and only for Administrator users `/clear 50`
-- [X] Command for showing up to date criptocurrency prices like BTC,ETH,SOL,Etc. `/crypto Bitcoin`
-- [X] Command for emojifying text up to 2000 length `/emojify text`
-- [X] Command for showing up to date different fiat prices for argentina `/fiat Dolar`
-- [X] Command for impersonating another user `/impersonate user text`
-- [X] Command for echoing arguments `/say text`
-- [X] Command for text to speech `/tts text`
-- [X] Welcome automessage for new members on general text channel
-
+- [x] Command for showing 1024px avatars of discord users `/avatar user`
+- [x] Command for clearing messages in a text channel up to 99 messages and only for Administrator users `/clear 50`
+- [x] Command for showing up to date criptocurrency prices like BTC,ETH,SOL,Etc. `/crypto Bitcoin`
+- [x] Command for emojifying text up to 2000 length `/emojify text`
+- [x] Command for showing up to date different fiat prices for argentina `/fiat Dolar`
+- [x] Command for impersonating another user `/impersonate user text`
+- [x] Command for echoing arguments `/say text`
+- [x] Command for text to speech `/tts text`
+- [x] Welcome automessage for new members on general text channel
 
 ### Dependencies
 
@@ -34,8 +33,11 @@ We use Node.JS to manage the dependencies.
 
 ### Hosting requirements
 
-* Node.JS
-* Discord Bot Token
+- Node.JS
+- Discord Bot Token
+- VSCode Extensions
+  - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+  - [Prettier ESLint](https://marketplace.visualstudio.com/items?itemName=rvest.vs-code-prettier-eslint)
 
 ### Running
 
