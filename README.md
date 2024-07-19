@@ -20,13 +20,14 @@ The G1P Bot is a newly programmed bot that its sole purpose is to do everything 
 - [x] Command for impersonating another user `/impersonate user text`
 - [x] Command for echoing arguments `/say text`
 - [x] Command for text to speech `/tts text`
+- [x] Command for interactive calculator `/calculator`
 - [x] Welcome automessage for new members on general text channel
 
 ### Dependencies
 
 The bot requires **Node.JS to work**.
 
-The bot will download libraries such as `discord.js`, `axios`, `dotenv` and `puppeeteer` to the `node_modules` directory
+The bot will download libraries such as `discord.js`, `axios`, `dotenv`, `eslint`, `prettier`, `mathjs` and `puppeeteer` to the `node_modules` directory
 other libraries will be directly injected to the bot
 
 We use Node.JS to manage the dependencies.
