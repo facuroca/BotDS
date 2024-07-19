@@ -13,7 +13,7 @@ The G1P Bot is a newly programmed bot that its sole purpose is to do everything 
 ## Features
 
 - [x] Command for showing 1024px avatars of discord users `/avatar user`
-- [x] Command for clearing messages in a text channel up to 99 messages and only for Administrator users `/clear 50`
+- [x] Command for clearing messages (up to 99 messages and only for Administrator users) `/clear 50`
 - [x] Command for showing up to date criptocurrency prices like BTC,ETH,SOL,Etc. `/crypto Bitcoin`
 - [x] Command for emojifying text up to 2000 length `/emojify text`
 - [x] Command for showing up to date different fiat prices for argentina `/fiat Dolar`
