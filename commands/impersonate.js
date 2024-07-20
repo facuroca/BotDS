@@ -31,7 +31,7 @@ module.exports = {
         }, 3000);
       });
     await interaction.reply({
-      content: "Acabo de imitar al usuario arriba mio!",
+      content: "Acabo de imitar al usuario xD!",
       ephemeral: true,
     });
   },
