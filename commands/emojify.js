@@ -12,7 +12,7 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    const text = interaction.options.getString("texto");
+    const text = interaction.options.getString("texto").toLowerCase();
     var emojified = text
       .split("")
       .map((char) => {

@@ -116,7 +116,7 @@ module.exports = {
     const msg = await interaction.reply({
       embeds: [embed],
       components: [row, row1, row2, row3, row4],
-      ephemeral: false,
+      ephemeral: true,
     });
 
     let data = "";
