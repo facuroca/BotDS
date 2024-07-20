@@ -12,6 +12,7 @@ The G1P Bot is a newly programmed bot that its sole purpose is to do everything 
 
 ## Features
 
+- [x] Command for transforming text to ascii `/ascii text`
 - [x] Command for showing 1024px avatars of discord users `/avatar user`
 - [x] Command for clearing messages (up to 99 messages and only for Administrator users) `/clear 50`
 - [x] Command for showing up to date criptocurrency prices like BTC,ETH,SOL,Etc. `/crypto Bitcoin`
@@ -27,7 +28,7 @@ The G1P Bot is a newly programmed bot that its sole purpose is to do everything 
 
 The bot requires **Node.JS to work**.
 
-The bot will download libraries such as `discord.js`, `axios`, `dotenv`, `eslint`, `prettier`, `mathjs` and `puppeeteer` to the `node_modules` directory
+The bot will download libraries such as `discord.js`, `axios`, `dotenv`, `eslint`, `prettier`, `mathjs`, `figlet` and `puppeeteer` to the `node_modules` directory
 other libraries will be directly injected to the bot
 
 We use Node.JS to manage the dependencies.
