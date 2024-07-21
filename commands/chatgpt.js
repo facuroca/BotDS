@@ -14,7 +14,7 @@ module.exports = {
     const { options } = interaction;
     const text = options.getString("texto");
 
-    const browser = await chromium.launch({ headless: false });
+    const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
 
     await page.goto("https://chat-app-f2d296.zapier.app/");
