@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const puppeteer = require("puppeteer");
+const { chromium } = require("playwright");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -13,39 +13,32 @@ module.exports = {
 
     const { options } = interaction;
     const text = options.getString("texto");
-    console.log(text);
 
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
 
     await page.goto("https://chat-app-f2d296.zapier.app/");
 
     //typing prompt
-    await page.waitForSelector(
-      'textarea[data-testid="user-prompt"][placeholder="automate"]'
-    );
-    await page.focus(
-      'textarea[data-testid="user-prompt"][placeholder="automate"]'
-    );
-    await page.keyboard.type(text);
+    await page.getByPlaceholder("automate").fill(text);
     await page.keyboard.press("Enter");
 
+    await page.waitForTimeout(10000);
+
     //wait for response
-    await page.waitForSelector('div > [data-testid="bot-message"]', {
-      timeout: 50000,
-    });
-    var value = await page.$$eval(
-      'div > [data-testid="bot-message"]',
-      async (elements) => {
-        return elements.map((element) => element.textContent);
-      }
-    );
-    console.log(value);
+    const locator = await page.locator('div [data-testid="bot-message"]');
+    const count = await locator.count();
+
+    for (let i = 0; i < count; i++) {
+      const responseText = await locator.nth(i).innerText();
+      console.log(responseText);
+    }
+
+    const finalResponse = await locator.nth(count - 1).innerText();
     await browser.close();
 
     const embed = new EmbedBuilder()
-      //.setDescription(`\`\`\`${value.join('\n')}\`\`\``)
-      .setDescription(`\`\`\`${value}\`\`\``)
+      .setDescription(`\`\`\`${finalResponse}\`\`\``)
       .setColor("Blurple")
       .setImage(
         "https://canalc.com.ar/wp-content/uploads/2023/04/What-is-ChatGPT-Beginners-Guide-to-Using-the-AI-Chatbot.webp"
