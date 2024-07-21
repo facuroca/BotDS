@@ -14,7 +14,7 @@ module.exports = {
     const { options } = interaction;
     const text = options.getString("texto");
 
-    const browser = await chromium.launch({ headless: true });
+    const browser = await chromium.launch({ headless: false });
     const page = await browser.newPage();
 
     await page.goto("https://chat-app-f2d296.zapier.app/");
@@ -27,14 +27,9 @@ module.exports = {
 
     //wait for response
     const locator = await page.locator('div [data-testid="bot-message"]');
-    const count = await locator.count();
 
-    for (let i = 0; i < count; i++) {
-      const responseText = await locator.nth(i).innerText();
-      console.log(responseText);
-    }
-
-    const finalResponse = await locator.nth(count - 1).innerText();
+    await locator.nth(1).waitFor({ state: "attached" });
+    const finalResponse = await locator.nth(1).innerText();
     await browser.close();
 
     const embed = new EmbedBuilder()
