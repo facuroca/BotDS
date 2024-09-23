@@ -1,13 +1,7 @@
-version: "3.8"
 services:
   g1pbot:
-    image: g1pbotds
-    environment:
-      - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN}
-      - DISCORD_GUILD_ID=${DISCORD_GUILD_ID}
-      - APPLICATION_ID=${APPLICATION_ID}
-      - RAPID_API_KEY=${RAPID_API_KEY}
-      - DOCKER_USERNAME=${DOCKER_USERNAME}
-      - DOCKER_PASSWORD=${DOCKER_PASSWORD}
+    image: g1pbot
+    env_file:
+      - .env
     ports:
-      - "3000:3000"
+      - "4000:4000"
