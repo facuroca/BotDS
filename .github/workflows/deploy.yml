@@ -30,10 +30,11 @@ jobs:
         run: npm install
 
       - name: Deploy to VPS
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_GUILD_ID: ${{ secrets.DISCORD_GUILD_ID }}
+          APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
+          RAPID_API_KEY: ${{ secrets.RAPID_API_KEY }}
         run: |
-          export DISCORD_BOT_TOKEN='${{ secrets.DISCORD_BOT_TOKEN }}'
-          export DISCORD_GUILD_ID='${{ secrets.DISCORD_GUILD_ID }}'
-          export APPLICATION_ID='${{ secrets.APPLICATION_ID }}'
-          export RAPID_API_KEY='${{ secrets.RAPID_API_KEY }}'
           docker-compose up g1pbot -d
           docker system prune -f
