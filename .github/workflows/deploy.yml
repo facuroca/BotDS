@@ -1,0 +1,40 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Deploy to VPS
+        run: |
+            DISCORD_BOT_TOKEN='${{ secrets.DISCORD_BOT_TOKEN }}' \
+            DISCORD_GUILD_ID='${{ secrets.DISCORD_GUILD_ID }}' \
+            APPLICATION_ID='${{ secrets.APPLICATION_ID }}' \
+            RAPID_API_KEY='${{ secrets.RAPID_API_KEY }}' \
+            docker-compose up g1pbot -d
+            docker system prune -f
+          EOF
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install
