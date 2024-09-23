@@ -1,7 +1,7 @@
 version: "3"
 services:
   mi_servicio:
-    image: g1pbotds # Aquí pones la imagen que estás usando
+    image: g1pbot # Aquí pones la imagen que estás usando
     env_file:
       - .env
     ports:
