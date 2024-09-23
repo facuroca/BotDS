@@ -40,12 +40,14 @@ jobs:
           sudo chmod +x /usr/local/bin/docker-compose
           sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
+      - name: Create .env file
+        run: |
+          echo DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }} >> .env
+          echo DISCORD_GUILD_ID=${{ secrets.DISCORD_GUILD_ID }} >> .env
+          echo APPLICATION_ID=${{ secrets.APPLICATION_ID }} >> .env
+          echo RAPID_API_KEY=${{ secrets.RAPID_API_KEY }} >> .env
+
       - name: Deploy to VPS
-        env:
-          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
-          DISCORD_GUILD_ID: ${{ secrets.DISCORD_GUILD_ID }}
-          APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
-          RAPID_API_KEY: ${{ secrets.RAPID_API_KEY }}
         run: |
           docker-compose up g1pbot -d
           docker system prune -f
