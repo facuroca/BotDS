@@ -40,6 +40,13 @@ jobs:
           sudo chmod +x /usr/local/bin/docker-compose
           sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
+      - name: Docker login
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+
       - name: Create .env file
         run: |
           echo DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }} >> .env
