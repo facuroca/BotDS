@@ -49,5 +49,5 @@ jobs:
 
       - name: Deploy to VPS
         run: |
-          docker-compose up g1pbot -d
+          docker-compose up -d g1pbot
           docker system prune -f
